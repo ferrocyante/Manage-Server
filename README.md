@@ -1,6 +1,6 @@
 # Manage-Server • Switch Tabs - Companion Repo
 
-This repo contains the two components required to make the [Switch Tabs Raycast extension](https://github.com/your-username/switch-tabs-raycast) work:
+This repo contains the two components required to make the [Switch Tabs Raycast extension](https://github.com/ferrocyante/Switch-Tabs) work:
 
 - **`server/`** — the local bridge server (`.exe`) that relays messages between Raycast and your browser
 - **`raycast-browser-bridge/`** — the browser extension (Manifest V3) that connects to the server and controls your tabs
