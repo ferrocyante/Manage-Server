@@ -1,4 +1,4 @@
-# Switch Tabs — Companion Repo
+# Manage-Server • Switch Tabs - Companion Repo
 
 This repo contains the two components required to make the [Switch Tabs Raycast extension](https://github.com/your-username/switch-tabs-raycast) work:
 
@@ -26,35 +26,45 @@ Follow every step in order.
 
 **Option B — Load unpacked (Chrome, Brave, Vivaldi, Opera, or any Chromium browser)**
 
-1. Download or clone this repo.
+1. Download and unzip the package folder from latest release.
 2. Open your browser and go to `chrome://extensions`.
 3. Enable **Developer mode** (toggle in the top-right corner).
 4. Click **Load unpacked**.
-5. Select the `raycast-browser-bridge` folder from this repo.
+5. Select the `raycast-browser-bridge` folder from inside package folder.
 6. The extension will appear in your list. **Copy the Extension ID** shown under its name — you will need to paste it into the Raycast extension preferences in Step 4.
 
 ---
 
 ### Step 2 — Place the Server Folder
 
-Put the `server` folder somewhere permanent on your machine, for example:
+Put the `server` folder which is inside the package folder somewhere permanent on your machine, for example:
 
 ```
 C:\Tools\switch-tabs-server\
 ```
-
 > **Important:** Do not move this folder after registration. If you do, re-run Step 3.
 
 ---
 
-### Step 3 — Register the Native Host (one-time)
+### Step 3 — Configure the Raycast Extension
+
+Open Raycast → search **Switch Tabs** → press `Ctrl + ,` to open Extension Preferences.
+
+| Preference | What to set |
+|------------|-------------|
+| **Server Directory Path** | Full path to your `server` folder (e.g. `C:\Tools\switch-tabs-server`) |
+| **Browser Extension ID** | **If you used Option A (store):** leave as the default — it's already set. **If you used Option B (unpacked):** paste the Extension ID you copied from `chrome://extensions` |
+
+---
+
+### Step 4  — Register the Native Host (one-time)
 
 The bridge server communicates with the browser extension via Chrome's Native Messaging API. This step writes the required registry entries so your browser knows where the server lives.
 
 **Option A — Via Raycast (recommended)**
 
 1. Install the [Switch Tabs Raycast extension](https://github.com/your-username/switch-tabs-raycast) first.
-2. Configure the **Server Directory Path** preference to point to your `server` folder (see Step 4 below).
+2. Configure the **Server Directory Path** preference to point to your `server` folder (see Step 3 above).
 3. Open Raycast → type **Manage Server** → press Enter.
 4. Select **Register Browser Bridge (Native Host)** → press Enter.
 5. A PowerShell window will open, run the registration, and close automatically.
@@ -65,25 +75,15 @@ The bridge server communicates with the browser extension via Chrome's Native Me
 1. Navigate to `server\setup\`.
 2. Right-click `Register-Bridge.bat`.
 
-> **What this does:** Writes a native messaging manifest to the Windows registry under `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.raycast.browser.bridge` (and equivalent keys for Edge, Brave, Vivaldi, Opera). This tells each browser where to find `raycast-bridge-server.exe` when the extension requests a native connection.
+> **What this does:** Writes a native messaging manifest to the Windows registry under `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.raycast.browser.bridge` (and equivalent keys for Edge, Brave, Chrome). This tells each browser where to find `raycast-bridge-server.exe` when the extension requests a native connection.
 
----
-
-### Step 4 — Configure the Raycast Extension
-
-Open Raycast → search **Switch Tabs** → press `Cmd + ,` to open Extension Preferences.
-
-| Preference | What to set |
-|------------|-------------|
-| **Server Directory Path** | Full path to your `server` folder (e.g. `C:\Tools\switch-tabs-server`) |
-| **Browser Extension ID** | **If you used Option A (store):** leave as the default — it's already set. **If you used Option B (unpacked):** paste the Extension ID you copied from `chrome://extensions` |
 
 ---
 
 ### Step 5 — Verify the Connection
 
 1. Open Raycast → type **Switch Tabs** → press Enter.
-2. Your open tabs should appear within 1–2 seconds.
+2. Your open tabs should appear within 1–2 seconds.(if they dont reload you browser extesion and reopen  **Switch Tabs** command in raycast)
 3. The search bar placeholder will show the connected browser name (e.g. `Filter Tabs | Edge`).
 
 You can also click the extension icon in your browser toolbar — the popup shows the connection status and detected browser type.
