@@ -124,7 +124,7 @@ Open Edge and go to `edge://sync`. go to data tab then unselect all ticks
 
 <img width="951" height="548" alt="image" src="https://github.com/user-attachments/assets/3f73353b-aa0e-43f6-931c-f7f5b6b5c615" />
 
-then tick only Edge Workspace and make you also tick nodes content tick as shown below. then click on **Dump Sync Node to File**. you csv file will be downloaded.
+then tick only Edge Workspace and make sure you also tick nodes content tick as shown below. then click on **Dump Sync Node to File**. you csv file will be downloaded.
 
 <img width="761" height="959" alt="image" src="https://github.com/user-attachments/assets/f033f98f-636d-4ea0-850e-712436a81e5f" />
 
