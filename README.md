@@ -52,7 +52,7 @@ Open Raycast → search **Switch Tabs** → press `Ctrl + ,` to open Extension P
 
 | Preference | What to set |
 |------------|-------------|
-| **Server Directory Path** | Full path to your `server` folder (e.g. `C:\Tools\switch-tabs-server`) |
+| **Server Directory Path** | Full path to your `server` folder (e.g. `C:\Tools\server`) |
 | **Browser Extension ID** | **If you used Option A (store):** leave as the default — it's already set. **If you used Option B (unpacked):** paste the Extension ID you copied from `chrome://extensions` |
 
 ---
