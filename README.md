@@ -24,25 +24,26 @@ Follow every step in order.
 3. Click **Get** → **Add Extension**.
 4. Done. The default Extension ID in the Raycast extension preferences is already set for the store version — you don't need to change anything.
 
-**Option B — Load unpacked (Chrome, Brave, Vivaldi, Opera, or any Chromium browser)**
+**Option B — Load unpacked (Chrome, Brave, or any Chromium browser)**
 
-1. Download and unzip the package folder from latest release.
+1. Download and unzip the package folder from the latest release.
 2. Open your browser and go to `chrome://extensions`.
 3. Enable **Developer mode** (toggle in the top-right corner).
 4. Click **Load unpacked**.
-5. Select the `raycast-browser-bridge` folder from inside package folder.
-6. The extension will appear in your list. **Copy the Extension ID** shown under its name — you will need to paste it into the Raycast extension preferences in Step 4.
+5. Select the `raycast-browser-bridge` folder from inside the package folder.
+6. The extension will appear in your list. **Copy the Extension ID** shown under its name — you will need to paste it into the Raycast extension preferences in Step 3.
 
 ---
 
 ### Step 2 — Place the Server Folder
 
-Put the `server` folder which is inside the package folder somewhere permanent on your machine, for example:
+Put the `server` folder (inside the package folder) somewhere permanent on your machine, for example:
 
 ```
 C:\Tools\switch-tabs-server\
 ```
-> **Important:** Do not move this folder after registration. If you do, re-run Step 3.
+
+> **Important:** Do not move this folder after registration. If you do, re-run Step 4.
 
 ---
 
@@ -57,18 +58,17 @@ Open Raycast → search **Switch Tabs** → press `Ctrl + ,` to open Extension P
 
 ---
 
-### Step 4  — Register the Native Host (one-time)
+### Step 4 — Register the Native Host (one-time)
 
 The bridge server communicates with the browser extension via Chrome's Native Messaging API. This step writes the required registry entries so your browser knows where the server lives.
 
 **Option A — Via Raycast (recommended)**
 
-1. Install the [Switch Tabs Raycast extension](https://github.com/your-username/switch-tabs-raycast) first.
-2. Configure the **Server Directory Path** preference to point to your `server` folder (see Step 3 above).
-3. Open Raycast → type **Manage Server** → press Enter.
-4. Select **Register Browser Bridge (Native Host)** → press Enter.
-5. A PowerShell window will open, run the registration, and close automatically.
-6. You'll see a success toast in Raycast when it's done.
+1. Configure the **Server Directory Path** preference to point to your `server` folder (Step 3 above).
+2. Open Raycast → type **Manage Server** → press Enter.
+3. Select **Register Browser Bridge (Native Host)** → press Enter.
+4. A PowerShell window will open, run the registration, and close automatically.
+5. You'll see a success toast in Raycast when it's done.
 
 **Option B — Via BAT file**
 
@@ -77,13 +77,12 @@ The bridge server communicates with the browser extension via Chrome's Native Me
 
 > **What this does:** Writes a native messaging manifest to the Windows registry under `HKCU\Software\Google\Chrome\NativeMessagingHosts\com.raycast.browser.bridge` (and equivalent keys for Edge, Brave, Chrome). This tells each browser where to find `raycast-bridge-server.exe` when the extension requests a native connection.
 
-
 ---
 
 ### Step 5 — Verify the Connection
 
 1. Open Raycast → type **Switch Tabs** → press Enter.
-2. Your open tabs should appear within 1–2 seconds.(if they dont reload you browser extesion and reopen  **Switch Tabs** command in raycast)
+2. Your open tabs should appear within 1–2 seconds. If they don't, reload your browser extension and reopen the **Switch Tabs** command in Raycast.
 3. The search bar placeholder will show the connected browser name (e.g. `Filter Tabs | Edge`).
 
 You can also click the extension icon in your browser toolbar — the popup shows the connection status and detected browser type.
@@ -92,10 +91,45 @@ You can also click the extension icon in your browser toolbar — the popup show
 
 ### Step 6 — (Optional) Connect Additional Browsers
 
-The native host registration in Step 3 covers all supported Chromium browsers at once. To add another browser:
+The native host registration in Step 4 covers all supported Chromium browsers at once. To add another browser:
 
 1. Install the browser extension in that browser using **Option B (Load unpacked)** from Step 1.
 2. No additional registration is needed — the server is already registered for all browsers.
+
+<details>
+<summary>Step 7 — (Optional) Set Up Edge Workspaces</summary>
+
+If you use Edge Workspaces, Switch Tabs can display your workspace names next to each window and let you browse them from inside Raycast. Here's how to get them synced.
+
+**How it works**
+
+Edge stores workspace metadata in its sync system. The extension reads this via the native messaging pipe and maps each browser window to its workspace name automatically. You just need to make sure Edge sync is enabled and the import has been run once.
+
+**1. Enable Edge Sync**
+
+Open Edge and go to `edge://sync`. Make sure you are signed in and sync is turned on.
+
+![edge sync page](https://github.com/user-attachments/assets/your-screenshot-here)
+
+**2. Run Import Workspaces**
+
+Open Raycast → type **Manage Server** → press Enter → select **Import Edge Workspaces** → press Enter.
+
+This runs `ImportWorkspaces.ps1` which reads your Edge sync data and writes the workspace roster to `workspaces_roster.json` in the server folder. The server picks this up automatically.
+
+![import workspaces](https://github.com/user-attachments/assets/your-screenshot-here)
+
+**3. Verify**
+
+Open **Switch Tabs** in Raycast. Windows that belong to a workspace will show the workspace name in the window filter dropdown and next to each tab. If names don't appear, try reloading the browser extension and reopening Switch Tabs.
+
+**Notes**
+
+- You only need to run Import Workspaces once, or again if you create new workspaces.
+- Workspace names sync via the native messaging pipe even when the WebSocket is temporarily offline.
+- If you rename a workspace in Edge, re-run Import Workspaces to pick up the new name.
+
+</details>
 
 ---
 
@@ -106,7 +140,7 @@ The native host registration in Step 3 covers all supported Chromium browsers at
 1. Make sure the browser extension is installed and enabled in your browser.
 2. Click the extension icon in the toolbar — the popup should show **Connected**. If it shows **Disconnected**, the server is not running.
 3. Open **Manage Server → Watch Bridge Logs** in Raycast to start the server and see live output.
-4. If the server fails to start, re-run **Register Browser Bridge** (Step 3). The registration may have been lost if you moved the `server` folder.
+4. If the server fails to start, re-run **Register Browser Bridge** (Step 4). The registration may have been lost if you moved the `server` folder.
 
 ### Tabs from a specific browser are not showing
 
@@ -143,9 +177,8 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 | Brave | Load unpacked |
 | Helium / Ungoogled Chromium | Load unpacked |
 
----
-
-## Repo Structure
+<details>
+<summary>Repo Structure</summary>
 
 ```
 companion-repo/
@@ -172,11 +205,13 @@ companion-repo/
     ├── workspaces_metadata.json
     ├── workspaces_roster.json
     └── setup/
-        ├── Register-Bridge.bat    # BAT alternative for register-bridge.ps1
+        ├── Register-Bridge.bat
         ├── Setup-Bridge.bat
         ├── Watch-Logs.bat
         └── import_workspaces.bat
 ```
+
+</details>
 
 ---
 
