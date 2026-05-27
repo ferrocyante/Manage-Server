@@ -108,7 +108,7 @@ The native host registration in Step 4 covers all supported Chromium browsers at
 ---
 
 <details>    
-<summary> ###  Set Up Edge Workspaces </summary>
+<summary> 🟢 SET UP EDGE WORKSPACES </summary>
 
 If you use Edge Workspaces, Switch Tabs can display your workspace names next to each window and let you browse them from inside Raycast. Here's how to get them synced.
 
