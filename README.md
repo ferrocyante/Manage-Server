@@ -126,7 +126,7 @@ Open Edge and go to `edge://sync`. go to data tab then unselect all ticks
 
 then tick only Edge Workspace and make you also tick nodes content tick as shown below. then click on **Dump Sync Node to File**. you csv file will be downloaded.
 
-![edge sync page](<img width="761" height="959" alt="image" src="https://github.com/user-attachments/assets/f033f98f-636d-4ea0-850e-712436a81e5f" />)
+<img width="761" height="959" alt="image" src="https://github.com/user-attachments/assets/f033f98f-636d-4ea0-850e-712436a81e5f" />
 
 **2. Run Import Workspaces**
 
@@ -136,7 +136,7 @@ This runs `ImportWorkspaces.ps1` which will ask you for workspace csv file . sel
 
 Edge sync data and writes the workspace roster to `workspaces_roster.json` in the server folder. The server picks this up automatically.
 
-![import workspaces](https://github.com/user-attachments/assets/your-screenshot-here)
+
 
 **3. Verify**
 
