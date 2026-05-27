@@ -33,6 +33,15 @@ Follow every step in order.
 5. Select the `raycast-browser-bridge` folder from inside the package folder.
 6. The extension will appear in your list. **Copy the Extension ID** shown under its name — you will need to paste it into the Raycast extension preferences in Step 3.
 
+> **Helium / Ungoogled Chromium users:** Helium is sometimes misdetected as Chrome because it strips Google-specific APIs that the extension uses for browser identification. After loading the extension, you need to manually set the browser type once:
+>
+> 1. Go to `chrome://extensions` and click **Service Worker** under the Switch Tabs Bridge extension to open the background DevTools.
+> 2. In the Console tab, paste and run:
+>    ```js
+>    chrome.storage.local.set({ browserOverride: "helium" })
+>    ```
+> 3. Close DevTools. The extension will now correctly identify itself as Helium to the server and Raycast.
+
 ---
 
 ### Step 2 — Place the Server Folder
@@ -96,8 +105,10 @@ The native host registration in Step 4 covers all supported Chromium browsers at
 1. Install the browser extension in that browser using **Option B (Load unpacked)** from Step 1.
 2. No additional registration is needed — the server is already registered for all browsers.
 
-<details>
-<summary>Step 7 — (Optional) Set Up Edge Workspaces</summary>
+---
+
+<details>    
+<summary> ###  Set Up Edge Workspaces </summary>
 
 If you use Edge Workspaces, Switch Tabs can display your workspace names next to each window and let you browse them from inside Raycast. Here's how to get them synced.
 
