@@ -9,41 +9,6 @@ This repo contains the two components required to make the [Switch Tabs Raycast 
 
 ---
 
-## Repo Structure
-
-```
-companion-repo/
-├── raycast-browser-bridge/        ← browser extension source
-│   ├── manifest.json
-│   ├── background.js              # service worker — message router + WebSocket client
-│   ├── connection.js              # WebSocket connect / reconnect logic
-│   ├── handlers.js                # all tab/group/bookmark/download action handlers
-│   ├── keepalive.js               # MV3 service worker keepalive (prevents 30s timeout)
-│   ├── media.js                   # media polling + injection
-│   ├── state.js                   # shared extension state
-│   ├── stateSync.js               # broadcast helpers (tabs, bookmarks, history…)
-│   ├── utils.js                   # shared utilities
-│   ├── popup.html                 # extension popup UI
-│   ├── popup.js                   # popup logic (status, browser override)
-│   └── icon.png
-└── server/                        ← bridge server + setup scripts
-    ├── raycast-bridge-server.exe  # the bridge server binary
-    ├── register-bridge.ps1        # registers native host with all browsers (run once)
-    ├── watch-logs.ps1             # opens a terminal with live WebSocket logs
-    ├── ImportWorkspaces.ps1       # imports Edge workspace tab configs
-    ├── setup-bridge.ps1           # alternative setup script
-    ├── com.raycast.browser.bridge.json  # native messaging manifest
-    ├── workspaces_metadata.json
-    ├── workspaces_roster.json
-    └── setup/
-        ├── Register-Bridge.bat    # BAT alternative for register-bridge.ps1
-        ├── Setup-Bridge.bat
-        ├── Watch-Logs.bat
-        └── import_workspaces.bat
-```
-
----
-
 ## Full Setup Guide
 
 Follow every step in order.
@@ -177,6 +142,41 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 | Google Chrome | Load unpacked |
 | Brave | Load unpacked |
 | Helium / Ungoogled Chromium | Load unpacked |
+
+---
+
+## Repo Structure
+
+```
+companion-repo/
+├── raycast-browser-bridge/        ← browser extension source
+│   ├── manifest.json
+│   ├── background.js              # service worker — message router + WebSocket client
+│   ├── connection.js              # WebSocket connect / reconnect logic
+│   ├── handlers.js                # all tab/group/bookmark/download action handlers
+│   ├── keepalive.js               # MV3 service worker keepalive (prevents 30s timeout)
+│   ├── media.js                   # media polling + injection
+│   ├── state.js                   # shared extension state
+│   ├── stateSync.js               # broadcast helpers (tabs, bookmarks, history…)
+│   ├── utils.js                   # shared utilities
+│   ├── popup.html                 # extension popup UI
+│   ├── popup.js                   # popup logic (status, browser override)
+│   └── icon.png
+└── server/                        ← bridge server + setup scripts
+    ├── raycast-bridge-server.exe  # the bridge server binary
+    ├── register-bridge.ps1        # registers native host with all browsers (run once)
+    ├── watch-logs.ps1             # opens a terminal with live WebSocket logs
+    ├── ImportWorkspaces.ps1       # imports Edge workspace tab configs
+    ├── setup-bridge.ps1           # alternative setup script
+    ├── com.raycast.browser.bridge.json  # native messaging manifest
+    ├── workspaces_metadata.json
+    ├── workspaces_roster.json
+    └── setup/
+        ├── Register-Bridge.bat    # BAT alternative for register-bridge.ps1
+        ├── Setup-Bridge.bat
+        ├── Watch-Logs.bat
+        └── import_workspaces.bat
+```
 
 ---
 
