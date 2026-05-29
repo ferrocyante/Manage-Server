@@ -113,31 +113,50 @@ Just install the browser extension in the additional browser (Step 1, Option B).
 
 ---
 
-<details>
-<summary>Step 7 — (Optional) Set Up Edge Workspaces</summary>
+<details>    
+<summary> 🟢 SET UP EDGE WORKSPACES </summary>
 
-If you use Edge Workspaces, Switch Tabs can display your workspace names next to each window and let you browse them from inside Raycast.
+---
+
+If you use Edge Workspaces, Switch Tabs can display your workspace names next to each window and let you browse them from inside Raycast. Here's how to get them synced.
+
+**How it works**
+
+Edge stores workspace metadata in its sync system. The extension reads this via the native messaging pipe and maps each browser window to its workspace name automatically. 
 
 **1. Enable Edge Sync**
 
-Open Edge and go to `edge://sync`. Make sure you are signed in and sync is turned on.
+Open Edge and go to `edge://sync`. go to data tab then unselect all ticks 
+
+<img width="951" height="548" alt="image" src="https://github.com/user-attachments/assets/3f73353b-aa0e-43f6-931c-f7f5b6b5c615" />
+
+then tick only Edge Workspace and make sure you also tick nodes content tick as shown below. then click on **Dump Sync Node to File**. your csv file will be downloaded.
+
+<img width="761" height="959" alt="image" src="https://github.com/user-attachments/assets/f033f98f-636d-4ea0-850e-712436a81e5f" />
 
 **2. Run Import Workspaces**
 
 Open Raycast → type **Manage Server** → press Enter → select **Import Edge Workspaces** → press Enter.
 
-This runs `ImportWorkspaces.ps1` which reads your Edge sync data and writes the workspace roster to `workspaces_roster.json` in the server folder.
+This runs `ImportWorkspaces.ps1` which will ask you for workspace csv file . select the csv file and proceed with instruction in terminal window.
+
+Edge sync data and writes the workspace roster to `workspaces_roster.json` in the server folder. The server picks this up automatically.
+
+
 
 **3. Verify**
 
-Open **Switch Tabs** in Raycast. Windows that belong to a workspace will show the workspace name in the window filter dropdown and next to each tab.
+Open **Switch Tabs** in Raycast. Windows that belong to a workspace will show the workspace name in the window filter dropdown and next to each tab. If names don't appear, try reloading the browser extension and reopening Switch Tabs.
 
 **Notes**
 
 - You only need to run Import Workspaces once, or again if you create new workspaces.
+- Workspace names sync via the native messaging pipe even when the WebSocket is temporarily offline.
 - If you rename a workspace in Edge, re-run Import Workspaces to pick up the new name.
 
+---
 </details>
+
 
 ---
 
