@@ -5,7 +5,7 @@ This repo contains the two components required to make the [Switch Tabs Raycast 
 - **`server/`** — the local bridge server (`.exe`) that relays messages between Raycast and your browser
 - **`raycast-browser-bridge/`** — the browser extension (Manifest V3) that connects to the server and controls your tabs
 
-> **Browser Extension on Edge Add-ons Store:** [Switch Tabs Bridge](https://microsoftedge.microsoft.com/addons/detail/hphaioiiggmjhiocafgdbbeglcfljkjm)
+> **Browser Extension on Edge Add-ons Store:** [Switch Tabs Bridge](https://microsoftedge.microsoft.com/addons/detail/kpgdjpohjiaaikeohphffiaoepfmnaff)
 
 ---
 
@@ -32,7 +32,7 @@ Follow every step in order.
 **Option A — Edge Add-ons Store (easiest, works on Edge)**
 
 1. Open Microsoft Edge.
-2. Go to the [Switch Tabs Bridge store page](https://microsoftedge.microsoft.com/addons/detail/hphaioiiggmjhiocafgdbbeglcfljkjm).
+2. Go to the [Switch Tabs Bridge store page](https://microsoftedge.microsoft.com/addons/detail/kpgdjpohjiaaikeohphffiaoepfmnaff).
 3. Click **Get** → **Add Extension**.
 4. Done.
 
