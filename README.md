@@ -107,14 +107,36 @@ If no tabs appear, check **Manage Server** — the server status and browser cou
 
 ---
 
-### Step 6 — (Optional) Connect Additional Browsers
+## Bridge Control Panel
 
-Just install the browser extension in the additional browser (Step 1, Option B). No registration or configuration needed — the server accepts connections from any browser with the extension installed.
+The browser extension has a settings popup (click the extension icon) with the following options:
+
+### Popup Window Size
+Set the width and height for popup windows created via Focus Mode or search. Choose from presets (Super Compact, Classic Card, Wide Banner, Large Premium) or enter custom dimensions. Popup windows always open centered on your screen.
+
+### OS Focus & Desktop Switch
+Fine-tune the window focus bounce delays for reliable virtual desktop switching on Windows:
+- **Refocus Bounce** — delay between minimize and restore (default 10ms)
+- **Minimized Wait** — pause before restoring a minimized window (default 100ms)
+- **Focus Reinforce** — extra focus call after restore (default 50ms)
+
+### Sync Limits
+- **History Items** — max history entries synced to Raycast (default 100)
+- **Recent Closed** — max recently closed sessions synced (default 25)
+
+### New Tab Behavior
+- **Normal** — allow all new tabs
+- **Keep One** — maximum one new tab open at a time
+- **Bombardment** — no new tabs survive (all closed immediately)
+
+### Deep Scan Whitelist
+Domains added here will have all frames scanned for tab content (useful for sites with iframes like Netflix). Add the current site with one click or enter a domain manually.
 
 ---
 
+
 <details>    
-<summary> 🟢 SET UP EDGE WORKSPACES </summary>
+<summary><h3>🟢 SET UP EDGE WORKSPACES</h3></summary>
 
 ---
 
@@ -154,7 +176,7 @@ Open **Switch Tabs** in Raycast. Windows that belong to a workspace will show th
 - Workspace names sync via the native messaging pipe even when the WebSocket is temporarily offline.
 - If you rename a workspace in Edge, re-run Import Workspaces to pick up the new name.
 
----
+
 </details>
 
 
@@ -172,6 +194,7 @@ The **Manage Server** command gives you full control over the bridge server:
 | **Import Edge Workspaces** | Imports Edge workspace tab configurations |
 
 ---
+
 
 ## Troubleshooting
 
