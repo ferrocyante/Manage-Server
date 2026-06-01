@@ -55,7 +55,7 @@ Follow every step in order.
 
 ### Step 2 — Place the Server Folder
 
-Put the `server` folder somewhere permanent on your machine, for example:
+Download the server folder from the latest release. Confirm the folder must have the exe file inside it directly. Put the `server` folder somewhere permanent on your machine, for example:
 
 ```
 C:\Tools\switch-tabs-server\
