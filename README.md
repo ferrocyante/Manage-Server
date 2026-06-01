@@ -38,7 +38,7 @@ Follow every step in order.
 
 **Option B — Load unpacked (Chrome, Brave, or any Chromium browser)**
 
-1. Download and unzip the package folder from the latest release.
+1. Download and unzip the raycast-browser-bridge folder from the latest release.
 2. Open your browser and go to `chrome://extensions`.
 3. Enable **Developer mode** (toggle in the top-right corner).
 4. Click **Load unpacked**.
