@@ -1,11 +1,12 @@
 # Manage-Server • Switch Tabs - Companion Repo
 
-This repo contains the two components required to make the [Switch Tabs Raycast extension](https://github.com/ferrocyante/Switch-Tabs) work:
+This repo contains the components required to make the [Switch Tabs Raycast extension](https://github.com/ferrocyante/Switch-Tabs) work:
 
-- **`server/`** — the local bridge server (`.exe`) that relays messages between Raycast and your browser
 - **`raycast-browser-bridge/`** — the browser extension (Manifest V3) that connects to the server and controls your tabs
 
 > **Browser Extension on Edge Add-ons Store:** [Switch Tabs Bridge](https://microsoftedge.microsoft.com/addons/detail/kpgdjpohjiaaikeohphffiaoepfmnaff)
+
+> **The bridge server (`raycast-bridge-server.exe`) is downloaded automatically** by the Raycast extension on first use. You do not need to download or configure it manually.
 
 ---
 
@@ -38,7 +39,7 @@ Follow every step in order.
 
 **Option B — Load unpacked (Chrome, Brave, or any Chromium browser)**
 
-1. Download and unzip the raycast-browser-bridge folder from the latest release.
+1. Download and unzip `raycast-browser-bridge.zip` from the latest release.
 2. Open your browser and go to `chrome://extensions`.
 3. Enable **Developer mode** (toggle in the top-right corner).
 4. Click **Load unpacked**.
@@ -53,35 +54,17 @@ Follow every step in order.
 
 ---
 
-### Step 2 — Place the Server Folder
-
-Download the server folder from the latest release. Confirm the folder must have the exe file inside it directly. Put the `server` folder somewhere permanent on your machine, for example:
-
-```
-C:\Tools\switch-tabs-server\
-```
-
-> **Important:** Do not move this folder after configuring the Raycast extension. If you do, update the Server Directory Path preference.
-
----
-
-### Step 3 — Configure the Raycast Extension
-
-The first time you open **Switch Tabs** or **Manage Server**, Raycast will ask you to configure the extension. Set:
-
-| Preference | What to set |
-|------------|-------------|
-| **Server Directory Path** | Full path to your `server` folder (e.g. `C:\Tools\server`) |
-
-That's it. No Extension ID or native host registration needed.
-
----
-
-### Step 4 — Start the Server
+### Step 2 — Open Manage Server
 
 Open Raycast → type **Manage Server** → press Enter.
 
-You'll see the **Bridge Server** section at the top showing the current server status.
+On first open, the extension will automatically download the bridge server and required scripts. A progress screen will appear while this happens — it only takes a few seconds and only happens once.
+
+Once setup is complete you'll see the **Bridge Server** section showing the current server status.
+
+---
+
+### Step 3 — Start the Server
 
 - If the server is **Stopped**, press Enter on **Server Status** and select **Start Server**.
 - The server will start in the background and the status will turn green.
@@ -97,7 +80,7 @@ This writes a Windows Registry run key so the server launches silently at login 
 
 ---
 
-### Step 5 — Verify the Connection
+### Step 4 — Verify the Connection
 
 1. Open Raycast → type **Switch Tabs** → press Enter.
 2. Your open tabs should appear within 1–2 seconds.
@@ -134,7 +117,6 @@ Domains added here will have all frames scanned for tab content (useful for site
 
 ---
 
-
 <details>    
 <summary><h3>🟢 SET UP EDGE WORKSPACES</h3></summary>
 
@@ -144,15 +126,15 @@ If you use Edge Workspaces, Switch Tabs can display your workspace names next to
 
 **How it works**
 
-Edge stores workspace metadata in its sync system. The extension reads this via the native messaging pipe and maps each browser window to its workspace name automatically. 
+Edge stores workspace metadata in its sync system. The extension reads this via the native messaging pipe and maps each browser window to its workspace name automatically.
 
 **1. Enable Edge Sync**
 
-Open Edge and go to `edge://sync`. go to data tab then unselect all ticks 
+Open Edge and go to `edge://sync`. Go to the data tab then unselect all ticks.
 
 <img width="951" height="548" alt="image" src="https://github.com/user-attachments/assets/3f73353b-aa0e-43f6-931c-f7f5b6b5c615" />
 
-then tick only Edge Workspace and make sure you also tick nodes content tick as shown below. then click on **Dump Sync Node to File**. your csv file will be downloaded.
+Then tick only Edge Workspace and make sure you also tick the nodes content tick as shown below. Then click **Dump Sync Node to File**. Your CSV file will be downloaded.
 
 <img width="761" height="959" alt="image" src="https://github.com/user-attachments/assets/f033f98f-636d-4ea0-850e-712436a81e5f" />
 
@@ -160,11 +142,9 @@ then tick only Edge Workspace and make sure you also tick nodes content tick as 
 
 Open Raycast → type **Manage Server** → press Enter → select **Import Edge Workspaces** → press Enter.
 
-This runs `ImportWorkspaces.ps1` which will ask you for workspace csv file . select the csv file and proceed with instruction in terminal window.
+This runs `ImportWorkspaces.ps1` which will ask you for the workspace CSV file. Select the CSV file and proceed with the instructions in the terminal window.
 
-Edge sync data and writes the workspace roster to `workspaces_roster.json` in the server folder. The server picks this up automatically.
-
-
+The script writes the workspace roster to `workspaces_roster.json` in the server's support folder. The server picks this up automatically.
 
 **3. Verify**
 
@@ -173,12 +153,9 @@ Open **Switch Tabs** in Raycast. Windows that belong to a workspace will show th
 **Notes**
 
 - You only need to run Import Workspaces once, or again if you create new workspaces.
-- Workspace names sync via the native messaging pipe even when the WebSocket is temporarily offline.
 - If you rename a workspace in Edge, re-run Import Workspaces to pick up the new name.
 
-
 </details>
-
 
 ---
 
@@ -195,7 +172,6 @@ The **Manage Server** command gives you full control over the bridge server:
 
 ---
 
-
 ## Troubleshooting
 
 ### Switch Tabs shows "Bridge Server Not Running"
@@ -204,7 +180,7 @@ The server is not running. Open **Manage Server** and start it, or enable **Star
 
 ### Switch Tabs shows "No Tabs Found" / "Your browser is out of reach of the server"
 
-The server is running but no browser is connected. Make sure your browser is open and the extension is installed and enabled. Press `Ctrl+O` to open your default browser directly from the empty state.
+The server is running but no browser is connected. Make sure your browser is open and the extension is installed and enabled.
 
 ### "Connecting to Extension…" never resolves
 
@@ -220,9 +196,10 @@ The server is running but no browser is connected. Make sure your browser is ope
   chrome.storage.local.set({ browserOverride: "edge" }) // or chrome, brave, helium
   ```
 
-### Server folder not found error
+### Download failed on first open
 
-- Make sure the **Server Directory Path** preference points directly to the `server` folder — the one containing `watch-logs.ps1` and `ImportWorkspaces.ps1`.
+- Check your internet connection and reopen **Manage Server** — it will retry automatically.
+- If the issue persists, check that GitHub is accessible from your network.
 
 ### PowerShell execution policy error
 
@@ -250,26 +227,22 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 
 ```
 companion-repo/
-├── raycast-browser-bridge/        ← browser extension source
-│   ├── manifest.json
-│   ├── background.js              # service worker — message router + WebSocket client
-│   ├── connection.js              # WebSocket connect / reconnect / backoff logic
-│   ├── handlers.js                # all tab/group/bookmark/download action handlers
-│   ├── keepalive.js               # MV3 service worker keepalive port
-│   ├── media.js                   # media polling + injection
-│   ├── state.js                   # shared extension state
-│   ├── stateSync.js               # broadcast helpers (tabs, bookmarks, history…)
-│   ├── utils.js                   # shared utilities
-│   ├── popup.html                 # extension popup UI
-│   ├── popup.js                   # popup logic (status, browser override)
-│   └── icon.png
-└── server/                        ← bridge server + scripts
-    ├── raycast-bridge-server.exe  # the bridge server binary (WinExe, no console window)
-    ├── watch-logs.ps1             # opens a terminal with live color-coded WebSocket logs
-    ├── ImportWorkspaces.ps1       # imports Edge workspace tab configs
-    ├── workspaces_metadata.json
-    └── workspaces_roster.json
+└── raycast-browser-bridge/        ← browser extension source
+    ├── manifest.json
+    ├── background.js              # service worker — message router + WebSocket client
+    ├── connection.js              # WebSocket connect / reconnect / backoff logic
+    ├── handlers.js                # all tab/group/bookmark/download action handlers
+    ├── keepalive.js               # MV3 service worker keepalive port
+    ├── media.js                   # media polling + injection
+    ├── state.js                   # shared extension state
+    ├── stateSync.js               # broadcast helpers (tabs, bookmarks, history…)
+    ├── utils.js                   # shared utilities
+    ├── popup.html                 # extension popup UI
+    ├── popup.js                   # popup logic (status, browser override)
+    └── icon.png
 ```
+
+> The bridge server files (`raycast-bridge-server.exe`, `watch-logs.ps1`, `ImportWorkspaces.ps1`) are hosted as release assets and downloaded automatically by the Raycast extension on first use.
 
 </details>
 
